@@ -72,7 +72,7 @@ console.log(now - 1991 > now - 2018); //true
 //---------------- STRING LITERALS ---------------------
 const job = 'programmer';
 const birthYear = 1986;
-const age = now - birthYear;
+let age = now - birthYear;
 
 const norbert = `I'm ${firstName}, a ${age} years old \n ${job}`; // \n for new line
 console.log(norbert);
@@ -164,3 +164,57 @@ console.log(!hasDriversLicense); //false
 
 const shouldDrive = hasDriversLicense && hasGoodVision && !isTired;
 console.log(shouldDrive); //false
+
+// Switch statement
+
+const day = prompt('What day is it?');
+switch (day) {
+  case 'monday': //day === 'monday'
+    console.log('Plan course structure');
+    console.log('Go to coding meetup');
+    break;
+  case 'tuesday':
+    console.log('Prepare theory videos');
+    break;
+  case 'wednesday':
+  case 'thursday':
+    console.log('Write code examples');
+    break;
+  case 'friday':
+    console.log('Record videos');
+    break;
+  case 'saturday':
+  case 'sunday':
+    console.log('Enjoy the weekend');
+    break;
+  default:
+    console.log('Not a valid day!');
+}
+/* same as this:
+
+if (day === 'monday') {
+  console.log('Plan course structure');
+  console.log('Go to coding meetup');
+} else if (day === 'tuesday') {
+  console.log('Prepare theory videos');
+} else if (day === 'wednesday' || day === 'thursday') {
+  console.log('Write code examples');
+} else if (day === 'friday') {
+  console.log('Record videos');
+} else if (day === 'saturday' || day === 'sunday') {
+  console.log('Enjoy the weekend');
+} else {
+  console.log('Not a valid day!');
+}
+
+*/
+
+// Trenary operator
+age >= 18 ? console.log('I am an adult') : console.log('I am a minor'); //To return a single value
+
+const drink = age >= 18 ? 'wine 🍷' : 'milk 🍼'; // To declare variable depending on value
+console.log(drink);
+
+age = 17;
+console.log(`I'd like to drink ${age >= 18 ? 'wine 🍷' : 'milk 🍼'}`); //Since it is an expression, it can be used in string template literal
+//HINT: Use trenary operator for a simple decesion. For biger code blocks, use the if statement

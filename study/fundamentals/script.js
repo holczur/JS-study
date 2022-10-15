@@ -1,3 +1,4 @@
+'use strict'; //strict mode activated;
 //---------------- DATA TYPES ---------------------
 /* There are 7 data types:
     - Number
@@ -218,3 +219,23 @@ console.log(drink);
 age = 17;
 console.log(`I'd like to drink ${age >= 18 ? 'wine 🍷' : 'milk 🍼'}`); //Since it is an expression, it can be used in string template literal
 //HINT: Use trenary operator for a simple decesion. For biger code blocks, use the if statement
+
+//---------------- FUNCTIONS ---------------------
+
+function logger() {
+  console.log('lollylogger');
+}
+
+logger(); //calling, running or invoking function
+logger();
+logger();
+
+function fruitProcessor(apples, oranges) {
+  const juice = `Juice with ${apples} apples and ${oranges} oranges.`;
+  return juice;
+}
+
+const appleJuice = fruitProcessor(3, 5); //to capture returned value from the function
+console.log(appleJuice);
+
+console.log(fruitProcessor(1, 3)); //to simply use it's returned value

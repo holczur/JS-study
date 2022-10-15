@@ -260,8 +260,7 @@ const calcAge3 = birthYear => 2022 - birthYear; // oneliner that automatically r
 let age3 = calcAge3(1972);
 console.log(age3);
 
-const yearsUntilRetirement = birthYear => {
-  // need {} for code block
+const yearsUntilRetirement = birthYear => { // need {} for code block
   const age = 2022 - birthYear;
   const retirement = 65 - age;
   return retirement;
@@ -269,3 +268,24 @@ const yearsUntilRetirement = birthYear => {
 
 let retirement = yearsUntilRetirement(1986);
 console.log(`You have to wait another ${retirement} years until retirement`);
+  
+// in case of multiple parameters, we have to use a ()
+const ret2 = (birthYear, firstName) => `${firstName}, you have ${65 - (2022 - birthYear)} years until retirement.`
+console.log(ret2(1972, 'Joe'));
+
+// Functions calling other functions
+function cutFruitPieces (fruit) {
+  return fruit * 4;
+}
+
+const fruitPlate = function (apples, oranges) {
+  const applePieces = cutFruitPieces(apples); //call the other function with parameters given to this function
+  const orangePieces = cutFruitPieces(oranges);
+
+  const plate = `On your plate there are ${applePieces} apple pieces and ${orangePieces} slice of oranges`;
+  return plate;
+}
+
+console.log(fruitPlate(2, 3));
+
+ 

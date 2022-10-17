@@ -13,6 +13,7 @@
     for example:
     */
 
+
 let myNumber = 12233;
 let myString = 'this is a string';
 let myBoolean = true;
@@ -220,72 +221,3 @@ age = 17;
 console.log(`I'd like to drink ${age >= 18 ? 'wine 🍷' : 'milk 🍼'}`); //Since it is an expression, it can be used in string template literal
 //HINT: Use trenary operator for a simple decesion. For biger code blocks, use the if statement
 
-//---------------- FUNCTIONS ---------------------
-
-function logger() {
-  console.log('lollylogger');
-}
-
-logger(); //calling, running or invoking function
-logger();
-logger();
-
-function fruitProcessor(apples, oranges) {
-  const juice = `Juice with ${apples} apples and ${oranges} oranges.`;
-  return juice;
-}
-
-const appleJuice = fruitProcessor(3, 5); //to capture returned value from the function
-console.log(appleJuice);
-
-console.log(fruitProcessor(1, 3)); //to simply use it's returned value
-
-// Function declaration
-function calcAge1(birthYear) {
-  return 2022 - birthYear;
-}
-age = calcAge1(1976);
-console.log(age);
-
-//Function expression
-const calcAge2 = function (birthYear) {
-  return 2022 - birthYear;
-};
-
-let age2 = calcAge2(1991);
-console.log(age2);
-
-//Arrow function
-const calcAge3 = birthYear => 2022 - birthYear; // oneliner that automatically returns value
-let age3 = calcAge3(1972);
-console.log(age3);
-
-const yearsUntilRetirement = birthYear => { // need {} for code block
-  const age = 2022 - birthYear;
-  const retirement = 65 - age;
-  return retirement;
-};
-
-let retirement = yearsUntilRetirement(1986);
-console.log(`You have to wait another ${retirement} years until retirement`);
-  
-// in case of multiple parameters, we have to use a ()
-const ret2 = (birthYear, firstName) => `${firstName}, you have ${65 - (2022 - birthYear)} years until retirement.`
-console.log(ret2(1972, 'Joe'));
-
-// Functions calling other functions
-function cutFruitPieces (fruit) {
-  return fruit * 4;
-}
-
-const fruitPlate = function (apples, oranges) {
-  const applePieces = cutFruitPieces(apples); //call the other function with parameters given to this function
-  const orangePieces = cutFruitPieces(oranges);
-
-  const plate = `On your plate there are ${applePieces} apple pieces and ${orangePieces} slice of oranges`;
-  return plate;
-}
-
-console.log(fruitPlate(2, 3));
-
- 

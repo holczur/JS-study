@@ -190,14 +190,14 @@ const scoreDolphins = calcAverage(85, 54, 41);
 const scoreKoalas = calcAverage(23, 34, 27);
 
 const checkWinner = function (scoreA, scoreB) {
-  if (scoreA > scoreB * 2){
-    console.log(`Dolphins win (${scoreA} vs. ${scoreB})`)
-  } else if (scoreB > scoreA * 2){
-    console.log(`Koalas win (${scoreB} vs. ${scoreA})`)
-    } else {
-      console.log(`There's no winner (${scoreKoalas} vs. ${scoreDolphins})`)
-    }
-}
+  if (scoreA > scoreB * 2) {
+    console.log(`Dolphins win (${scoreA} vs. ${scoreB})`);
+  } else if (scoreB > scoreA * 2) {
+    console.log(`Koalas win (${scoreB} vs. ${scoreA})`);
+  } else {
+    console.log(`There's no winner (${scoreKoalas} vs. ${scoreDolphins})`);
+  }
+};
 
 checkWinner(scoreDolphins, scoreKoalas);
 
@@ -224,7 +224,7 @@ array) �
 GOOD LUCK 
  */
 
-
+/*-------------------------------------------------------------------------
 const tips = [];
 const total = new Array(); // just to remember arrays can be declared this way
 
@@ -239,7 +239,7 @@ calctip(555);
 calctip(44);
 console.log(tips);
 console.log(total);
-
+--------------------------------------------------------------------------------*/
 /**
  * Coding Challenge #2-3
 Let's go back to Mark and John comparing their BMIs! This time, let's use objects to 
@@ -263,22 +263,77 @@ const mark = {
   lastName: 'Miller',
   height: 1.69,
   weight: 78,
-  calcBMI: function(){
-    return this.bmi = this.weight / this.height ** 2;
+  calcBMI: function () {
+    return (this.bmi = this.weight / this.height ** 2);
   },
-}
+};
 const john = {
   firstName: 'John',
   lastName: 'Smith',
   height: 1.95,
   weight: 92,
-  calcBMI: function(){
-    return this.bmi = this.weight / this.height ** 2;
+  calcBMI: function () {
+    return (this.bmi = this.weight / this.height ** 2);
   },
-}
+};
 
 if (mark.calcBMI() > john.calcBMI()) {
-  console.log(`Mark's BMI (${mark.bmi}) is higher than John's (${john.bmi})`)
+  console.log(`Mark's BMI (${mark.bmi}) is higher than John's (${john.bmi})`);
 } else {
-  console.log(`John's BMI (${john.bmi}) is higher than Mark's (${mark.bmi})`)
+  console.log(`John's BMI (${john.bmi}) is higher than Mark's (${mark.bmi})`);
 }
+
+/**
+ * Coding Challenge #2-4
+Let's improve Steven's tip calculator even more, this time using loops!
+Your tasks:
+1. Create an array 'bills' containing all 10 test bill values
+2. Create empty arrays for the tips and the totals ('tips' and 'totals')
+3. Use the 'calcTip' function we wrote before (no need to repeat) to calculate
+tips and total values (bill + tip) for every bill value in the bills array. Use a for
+loop to perform the 10 calculations!
+Test data: 22, 295, 176, 440, 37, 105, 10, 1100, 86 and 52
+Hints: Call ‘calcTip ‘in the loop and use the push method to add values to the
+tips and totals arrays �
+Bonus:
+4. Bonus: Write a function 'calcAverage' which takes an array called 'arr' as
+an argument. This function calculates the average of all numbers in the given
+array. This is a difficult challenge (we haven't done this before)! Here is how to
+solve it:
+4.1. First, you will need to add up all values in the array. To do the addition,
+start by creating a variable 'sum' that starts at 0. Then loop over the
+array using a for loop. In each iteration, add the current value to the
+'sum' variable. This way, by the end of the loop, you have all values
+added together
+4.2. To calculate the average, divide the sum you calculated before by the
+length of the array (because that's the number of elements)
+4.3. Call the function with the 'totals' array
+GOOD LUCK 
+ */
+
+const bills = [22, 295, 176, 440, 37, 105, 10, 1100, 86, 52];
+const tips = [];
+const totals = [];
+
+const calctip = function (bill) {
+  const tip = bill <= 300 && bill >= 50 ? bill * 0.15 : bill * 0.2;
+  tips.push(tip);
+  totals.push(tip + bill);
+};
+
+for (let i = 0; i < bills.length; i++) {
+  calctip(bills[i]);
+}
+
+console.log(tips);
+console.log(totals);
+
+const calcAverage2 = function (arr) {
+  let avg = 0;
+  for (let i = 0; i < arr.length; i++) {
+    avg += arr[i];
+  }
+  return avg / arr.length;
+};
+
+console.log(calcAverage2(totals));

@@ -90,3 +90,29 @@ console.log(age1);
 
 const ages = [calcAge1(years[0]), calcAge1(years[1])];
 console.log(ages);
+
+// Array methods are functions dedicated to an array
+
+friends.push('Lee', 'Bob', ['Marta', 'Frank']); //insert item(s) to end
+console.log(friends);
+console.log(friends.push('Lee', 'Bob', ['Marta', 'Frank']));// executes function and returns value --> array's new length
+console.log(friends); // items were inserted even throuh console.log() 
+
+friends.unshift('Lucy'); //insert to start
+console.log(friends);
+
+friends.pop();// delete last
+console.log(friends);
+console.log(friends.pop()); //returns value --> deleted item
+console.log(friends);
+
+friends.shift(); // delete first
+console.log(friends);
+
+console.log(friends.indexOf('Bob')); // returns position
+console.log(friends.indexOf('Béla')); // returns -1 if item is not present
+
+console.log(friends.includes('Bob')); // returns boolean
+friends.push(23);
+console.log(friends.includes('23')); // it uses strict equality
+console.log(friends.includes(23)); // it uses strict equality

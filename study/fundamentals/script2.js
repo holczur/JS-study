@@ -247,3 +247,15 @@ for (let excercise = 1; excercise < 4; excercise++) {
     console.log(`Exercise ${excercise}: Lifting weight repetition ${rep} ⚙`);
   }
 }
+console.log('------------------while loop--------------------');
+
+//While loop: can be used more versatile, for eg. it doesn't need a counter, just a condition
+// until the condition is true, the loop will go on.
+const rollDice = () => Math.trunc(Math.random() * 6) + 1;
+let dice;
+
+while (dice !== 6) {
+  console.log(dice);
+  dice = rollDice();
+  if (dice === 6) console.log("You've rolled a six! Loop is about to end.");
+}

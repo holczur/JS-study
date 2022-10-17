@@ -170,3 +170,16 @@ const bob = {
 //console.log(bob.age); --> 52
 console.log(bob.calcAge());
 console.log(bob.getSummary());
+
+//---------------- ITERATION ---------------------
+// keeps running until the condition is true
+for(let i = 1; i <= 10; i++) {
+    console.log(i); 
+}
+
+//looping arrays
+const arr = [1, 3, 5, 7, 11];
+
+for (let i = 1; i<= arr.length; i++){
+    console.log(arr[i])
+}

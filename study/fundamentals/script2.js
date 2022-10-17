@@ -116,3 +116,57 @@ console.log(friends.includes('Bob')); // returns boolean
 friends.push(23);
 console.log(friends.includes('23')); // it uses strict equality
 console.log(friends.includes(23)); // it uses strict equality
+
+//---------------- OBJECTS ---------------------
+
+const jack = {
+    firstName: 'Jack',
+    lastName: 'Reacher',
+    age: 2022-1980,
+    job: 'private detective',
+    friends: ['Peter', 'Joseph', 'Benedek']
+}
+
+console.log(jack.age); // dot notation
+
+const nameKey = 'Name';
+console.log(jack['first' + nameKey]); // bracket notation --> can use calculation (expression)
+
+const interestedIn = prompt('What do you want to know about Jack? Choose between: firstName, lastName, age, job, friends')
+if(jack[interestedIn]) {
+    console.log(jack[interestedIn])
+} else {
+    console.log('Wrong request! Choose between: firstName, lastName, age, job, friends')
+}
+
+//add item to object
+jack.location = 'unknown';
+jack['twitter'] = '@jackreacher';
+console.log(jack);
+
+console.log(`${jack.firstName} has ${jack.friends.length} friends, and his best friend is ${jack.friends[0]}`)
+
+// function inside object
+
+const bob = {
+    firstName: 'Bob',
+    lastName: 'Ross',
+    birthYear: 1970,
+    job: 'artist',
+    friends: ['Peter', 'Joseph', 'Benedek'],
+    hasDriversLicense: false,
+    //calcAge: function(birthYear) {return 2022 - birthYear}
+    calcAge: function() {
+        this.age = 2022-this.birthYear;
+        return this.age //return is not necessary, but a good practice
+    }, //'this' keyword refers to the object in which we use it.
+
+    getSummary: function(){
+        return `${this.firstName} is a ${this.calcAge()}-year old ${this.job} and he ${this.hasDriversLicense ? 'has' : "doesn't have" + ' a drivers license'}`
+    }
+}
+
+//bob.age = bob.calcAge(bob.birthYear) : avoid hardcoding by using'this.'
+//console.log(bob.age); --> 52
+console.log(bob.calcAge());
+console.log(bob.getSummary());

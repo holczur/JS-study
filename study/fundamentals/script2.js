@@ -180,6 +180,33 @@ for(let i = 1; i <= 10; i++) {
 //looping arrays
 const arr = [1, 3, 5, 7, 11];
 
-for (let i = 1; i<= arr.length; i++){
-    console.log(arr[i])
+for (let i = 1; i < arr.length; i++){
+    console.log(arr[i]);
 }
+
+const arr2 = [true, 'hello', 'bye', 234];
+const arr3 = [];
+for (let i = 0; i < arr2.length; i++){
+  arr3[i] = typeof arr2[i]
+}
+console.log(arr3);
+
+//Fill array by looping two others
+const even = [2, 4, 6, 8];
+const odd = [1, 3, 5, 7];
+const allNum =[]
+for (let i = 0; i < arr2.length; i++){
+  allNum.push(even[i]);
+  allNum.push(odd[i]);
+}
+
+allNum.sort();
+console.log(allNum);
+
+const yearsOfBirth = [1998, 1986, 1973, 2000];
+const ages2 = [];
+
+for (let i = 0; i < yearsOfBirth.length; i++) {
+  ages2.push(2022 - yearsOfBirth[i])
+}
+console.log(ages2);

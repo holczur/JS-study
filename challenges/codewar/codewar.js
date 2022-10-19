@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * DESCRIPTION:
@@ -14,42 +14,66 @@ For example
  */
 
 function countSheeps(arrayOfSheep) {
-    let counter = 0;
-    for (let i = 0; i < arrayOfSheep.length; i++){
-      if (arrayOfSheep[i]) counter++;
+  let counter = 0;
+  for (let i = 0; i < arrayOfSheep.length; i++) {
+    if (arrayOfSheep[i]) counter++;
   }
-    return counter;
+  return counter;
 }
 
-
 //Reverse an array withuot the built-in function
-const reverse = function(array) {
-    const arr = [];
-    for (let i = array.length; i > -1; i--) {
-        arr.push(array[i])
-    }
-    return arr;
+const reverse = function (array) {
+  const arr = [];
+  for (let i = array.length; i > -1; i--) {
+    arr.push(array[i]);
   }
+  return arr;
+};
 // Sum up n nubers
 const summation = function (num) {
   let sum = 0;
-  for(let i = 1; i <= num; i++){
+  for (let i = 1; i <= num; i++) {
     sum += i;
   }
-      return sum;
-}
+  return sum;
+};
 
 console.log(summation(9));
 
-
 //how many divisors n has?
-const getDivisorsCnt = function (n){
+const getDivisorsCnt = function (n) {
   let numberOfDivisors = 0;
-  for (let i = 0; i <= n; i++){
-    if (n % i === 0){
+  for (let i = 0; i <= n; i++) {
+    if (n % i === 0) {
       numberOfDivisors++;
     }
-  } 
-return numberOfDivisors;
+  }
+  return numberOfDivisors;
+};
 
-}
+// Prime factorization
+
+const primeFactorizer = function (n) {
+  let divisors = [];
+
+  for (let i = 2; i < 20000; i++) {
+    if (n % i === 0) {
+      divisors.push(i);
+      n /= i;
+      console.log(n);
+      i = 1;
+      continue;
+    }
+  }
+  return divisors;
+};
+
+//divide two factorials
+const factorial = function (a) {
+  for (let i = a - 1; i > 0; i--) {
+    a *= i;
+  }
+  return a;
+};
+
+const factorialDivision = (n, d) => factorial(n) / factorial(d);

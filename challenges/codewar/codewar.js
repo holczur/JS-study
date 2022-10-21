@@ -77,3 +77,46 @@ const factorial = function (a) {
 };
 
 const factorialDivision = (n, d) => factorial(n) / factorial(d);
+
+/**
+ DESCRIPTION:
+Given an array of integers of any length, return an array that has 1 added to the value represented by the array.
+
+the array can't be empty
+only non-negative, single digit integers are allowed
+Return nil (or your language's equivalent) for invalid inputs.
+
+Examples
+For example the array [2, 3, 9] equals 239, adding one would return the array [2, 4, 0].
+
+[4, 3, 2, 5] would return [4, 3, 2, 6]
+------------------------------------------------------------------------
+1) Understanding the problem
+    I need a function that
+      - accepts an array as argument (only positive one digit integers are allowed)
+      - checks if the argument is valid
+      - interpret array as a number --> Logic?                                  
+      - add one to that number
+      - returns the numbers as an argument like array
+
+2) Sub-problems
+   ✔ - Check if argument is valid
+          if typeof arr[i] != number && >9 || <0 return null
+    - Number interpretation logic  
+        check last digit is 9? last digit = 0
+          if next digit = 9 repeate, else next digit += 1
+        check if all digit is 9? all digit = 0, new digit unshift to array = 1
+        else: last digit += 1
+    - Return modified array
+*/
+
+const addOne = function (arr) {
+  //validation
+  for (let i = 0; i < arr.length; i++) {
+    if (typeof arr[i] === "number" && arr[i] >= 0 && arr[i] < 9) {
+      continue;
+    } else {
+      return null;
+    }
+  }
+};

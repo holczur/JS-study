@@ -98,27 +98,27 @@ const avgKoalas3 = (105 + 95 + 98) / 3;
 if (avgDolphins === avgKoalas) {
   console.log("It's a draw!");
 } else if (avgDolphins > avgKoalas) {
-  console.log('Dolphins won!');
+  console.log("Dolphins won!");
 } else {
-  console.log('Koalas won!');
+  console.log("Koalas won!");
 }
 
 if (avgDolphins2 === avgKoalas2) {
   console.log("It's a draw!");
 } else if (avgDolphins2 > avgKoalas2 && avgDolphins2 >= 100) {
-  console.log('Dolphins won!');
+  console.log("Dolphins won!");
 } else {
-  console.log('Koalas won!');
+  console.log("Koalas won!");
 }
 
 if (avgDolphins2 === avgKoalas2 && avgDolphins3 + avgKoalas3 >= 200) {
   console.log("It's a draw!");
 } else if (avgDolphins3 > avgKoalas2 && avgDolphins3 >= 100) {
-  console.log('Dolphins won!');
+  console.log("Dolphins won!");
 } else if (avgDolphins3 < avgKoalas2 && avgKoalas3 >= 100) {
-  console.log('Koalas won!');
+  console.log("Koalas won!");
 } else {
-  console.log('No team has reached the minimum score');
+  console.log("No team has reached the minimum score");
 }
 
 console.log(avgKoalas, avgDolphins);
@@ -259,8 +259,8 @@ GOOD LUCK
  */
 
 const mark = {
-  firstName: 'Mark',
-  lastName: 'Miller',
+  firstName: "Mark",
+  lastName: "Miller",
   height: 1.69,
   weight: 78,
   calcBMI: function () {
@@ -268,8 +268,8 @@ const mark = {
   },
 };
 const john = {
-  firstName: 'John',
-  lastName: 'Smith',
+  firstName: "John",
+  lastName: "Smith",
   height: 1.95,
   weight: 92,
   calcBMI: function () {
@@ -337,3 +337,38 @@ const calcAverage2 = function (arr) {
 };
 
 console.log(calcAverage2(totals));
+
+/**
+ Coding Challenge #3-1
+Given an array of forecasted maximum temperatures, the thermometer displays a 
+string with the given temperatures. Example: [17, 21, 23] will print "... 17ºC in 1 
+days ... 21ºC in 2 days ... 23ºC in 3 days ..."
+Your tasks:
+1. Create a function 'printForecast' which takes in an array 'arr' and logs a 
+string like the above to the console. Try it with both test datasets.
+2. Use the problem-solving framework: Understand the problem and break it up 
+into sub-problems!
+Test data:
+§ Data 1: [17, 21, 23]
+§ Data 2: [12, 5, -5, 0, 4]
+GOOD LUCK �
+
+1) Understand the problem
+  How to iterate array items and the number of sequence?
+  How to create as long string as needed?
+
+2) Sub-problems
+  for loop logic
+  string template literal
+*/
+
+const testData1 = [17, 21, 23];
+const testData2 = [12, 5, -5, 0, 4];
+
+const printForecast = function (arr) {
+  let forecast = "... ";
+  for (let i = 0; i < arr.length; i++) {
+    forecast += `${arr[i]}ºC in ${i + 1} days ... `;
+  }
+  console.log(forecast);
+};

@@ -23,7 +23,26 @@ const calcTempAmpl = function (temps) {
   for (let i = 0; i < temps.length; i++) {
     if (typeof temps[i] !== "number") {
       temps.splice(i, 1);
-      return Math.max(...temps) - Math.min(...temps);
     }
   }
+  return Math.max(...temps) - Math.min(...temps);
+};
+
+//Problem 2: The project manager finds out that the function has to accept two arrays of temp.
+/*
+    1) Understanding the problem
+            Should the functionality run once on each array? --> No, it should merge the arrays
+    2) Breaking up into sub-problems
+            ✔ How to merge two arrays? --> arr.push(...arr2) //(for example)
+*/
+
+const temperatures2 = [8, 9, 11, 17, 21, "error", 27, 32, 30, 28];
+const calcTempAmpl2 = function (temps1, temps2) {
+  temps1.push(...temps2);
+  for (let i = 0; i < temps1.length; i++) {
+    if (typeof temps1[i] !== "number") {
+      temps1.splice(i, 1);
+    }
+  }
+  return Math.max(...temps1) - Math.min(...temps1);
 };

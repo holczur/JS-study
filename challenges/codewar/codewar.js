@@ -129,6 +129,7 @@ const addOne = function (arr) {
   let r = [];
   for (let i = 0; i < str.length; i++) {
     r.push(str[i]);
+    r[i] = parseInt(r[i]);
   }
   return r;
 };

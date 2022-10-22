@@ -95,28 +95,40 @@ For example the array [2, 3, 9] equals 239, adding one would return the array [2
     I need a function that
       - accepts an array as argument (only positive one digit integers are allowed)
       - checks if the argument is valid
-      - interpret array as a number --> Logic?                                  
-      - add one to that number
+      - add one to number --> Logic?
+        ✔ Should I use some method(s) that can result a number from array, and vice versa?
+       ❌ Shoul I manipulate each item separately and build up logic to increase them if needed? 
       - returns the numbers as an argument like array
 
 2) Sub-problems
-   ✔ - Check if argument is valid
+    ✔ - Check if argument is valid
           if typeof arr[i] != number && >9 || <0 return null
-    - Number interpretation logic  
-        check last digit is 9? last digit = 0
-          if next digit = 9 repeate, else next digit += 1
-        check if all digit is 9? all digit = 0, new digit unshift to array = 1
-        else: last digit += 1
-    - Return modified array
+    ✔ - Number interpretation logic
+        1. create string from array
+        2. remove ","
+        3. convert string to number
+        4. add one to that number
+        5. convert the number to string
+        6. push each letter to array
+    ✔ - Return new array
 */
 
 const addOne = function (arr) {
   //validation
   for (let i = 0; i < arr.length; i++) {
-    if (typeof arr[i] === "number" && arr[i] >= 0 && arr[i] < 9) {
+    if (typeof arr[i] === "number" && arr[i] >= 0 && arr[i] <= 9) {
       continue;
     } else {
       return null;
     }
   }
+
+  let num = parseInt(arr.join().replaceAll(",", ""));
+  num += 1;
+  let str = num.toString();
+  let r = [];
+  for (let i = 0; i < str.length; i++) {
+    r.push(str[i]);
+  }
+  return r;
 };

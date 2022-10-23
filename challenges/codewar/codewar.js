@@ -101,29 +101,54 @@ For example the array [2, 3, 9] equals 239, adding one would return the array [2
       - returns the numbers as an argument like array
 
 2) Sub-problems
-    ✔ - Check if argument is valid
-          if typeof arr[i] != number && >9 || <0 return null
-    ✔ - Number interpretation logic
+✔ - Check if argument is valid
+if typeof arr[i] != number && >9 || <0 return null
+✔ - Number interpretation logic
         1. create string from array
         2. remove ","
         3. convert string to number
         4. add one to that number
         5. convert the number to string
         6. push each letter to array
-    ✔ - Return new array
-*/
+        ✔ - Return new array
+        */
 
-const addOne = function (arr) {
+const upArray = function (arr) {
+  const isOnlyNine = (currentValue) => currentValue === 9;
   //validation
+  if (arr.length === 0) return null;
   for (let i = 0; i < arr.length; i++) {
-    if (typeof arr[i] === "number" && arr[i] >= 0 && arr[i] <= 9) {
-      continue;
-    } else {
+    if (arr[i] > 9 || arr[i] < 0 || typeof arr[i] !== "number") {
       return null;
+    } else continue;
+  }
+  // if all numbers are 9
+  if (arr.every(isOnlyNine)) {
+    for (let i = 0; i < arr.length; i++) {
+      arr[i] = 0;
     }
+    arr.unshift(1);
+    return arr;
   }
 
-  let num = parseInt(arr.join().replaceAll(",", ""));
+  //define how many 9s are following eachother
+  let counter = 0;
+  for (let i = arr.length - 1; i > -1; i--) {
+    if (arr[i] === 9) {
+      counter += 1;
+    } else if (arr[i] !== 9) break;
+  }
+
+  //modify values
+  for (let i = arr.length - 1; i > arr.length - counter - 1; i--) {
+    arr[i] = 0;
+  }
+  arr[arr.length - counter - 1] += 1;
+  return arr;
+};
+/* That will not work with long arrays (will result bigInt)
+
+let num = parseInt(arr.join().replaceAll(",", ""));
   num += 1;
   let str = num.toString();
   let r = [];
@@ -133,3 +158,4 @@ const addOne = function (arr) {
   }
   return r;
 };
+*/

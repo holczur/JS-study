@@ -14,37 +14,37 @@ const elGuess = document.querySelector(".guess");
  Ingredients:
  ✔- random number generator
  
- - when Check! is pressed:
+ ✔- when Check! is pressed:
  check if guess == secret number || higher || lower
  
- - when low || high:
+ ✔- when low || high:
  change message
  decrease score
  
- - when loose:
+ ✔- when loose:
  stop game
  change message
  
- -when correct
+ ✔-when correct
  stop game
  change message
  change backgroud color
  reveal number
  set up highscore if needed
  
- - when Again! is pressed:
+ ✔- when Again! is pressed:
  reset message
  reset score
  reset background color
  reset question mark
-        generate new secret number
-        */
+ generate new secret number
+ */
 
 const randomGenerator = function () {
   return Math.floor(Math.random() * 20) + 1;
 };
 
-const secretNumber = randomGenerator();
+let secretNumber = randomGenerator();
 let highScore = 0;
 let score = 20;
 
@@ -59,7 +59,7 @@ checkBtn.addEventListener("click", function () {
     score--;
     elScore.textContent = score;
   } else {
-    message.textContent = "You win";
+    message.textContent = "🥳You win";
     body.style.backgroundColor = "#60b347";
     number.textContent = secretNumber;
     checkBtn.disabled = true;
@@ -67,6 +67,10 @@ checkBtn.addEventListener("click", function () {
       highScore = score;
       elHighScore.textContent = highScore;
     }
+  }
+  if (score < 1) {
+    message.textContent = "😥You loose";
+    checkBtn.disabled = true;
   }
 });
 
@@ -78,4 +82,5 @@ againBtn.addEventListener("click", function () {
   score = 20;
   elScore.textContent = score;
   elGuess.value = "";
+  secretNumber = randomGenerator();
 });

@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+main {
+  padding: 3rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+section {
+  border: 1px solid #000;
+  width: 100%;
+  height: 35vh;
+  margin: 0 2rem 0 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.current {
+  background-color: rgb(178, 201, 126);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dice {
+  max-width: 30vw;
+}
+
+.btn--roll, .btn--hold {
+  padding: 10px;
+  height: 2rem;
+  width: 5rem;
+}
+
+.container {
+  display: flex;
+}
+
+.buttons {
+  flex-direction: column;
+}
+
+.operator {
+  margin: 2rem;
+}

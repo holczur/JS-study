@@ -3,10 +3,14 @@
 const btnRoll = document.querySelector('.btn--roll');
 const btnHold = document.querySelector('.btn--hold');
 const dice = document.querySelector('.dice');
+const player1 = document.querySelector('.player--0');
+const player2 = document.querySelector('.player--1');
+const btnNew = document.querySelector('.btn--new');
+const scoresEL = document.querySelectorAll('.score');
 
 let activePlayer = 0;
-let currentScores = [0, 0];
-let scores = [0, 0];
+const currentScores = [0, 0];
+const scores = [0, 0];
 
 const diceRoll = function () {
   const diceNum = Math.floor(Math.random() * 6) + 1;
@@ -41,24 +45,20 @@ const displayCurrent = function () {
     currentScores[activePlayer];
 };
 
-btnRoll.addEventListener('click', diceRoll);
-btnHold.addEventListener('click', hold);
-
-/*
-const changePlayer = function () {
-  player1.classList.contains('player--active')
-    ? (p1CurrentScore.textContent = score)
-    : (p2CurrentScore.textContent = score);
-  player1.classList.toggle('player--active');
-  player2.classList.toggle('player--active');
+const reset = function () {
+  activePlayer = 0;
+  scores[0] = scores[1] = 0;
+  currentScores[0] = currentScores[1] = 0;
+  displayCurrent();
+  for (let i = 0; i < scoresEL.length; i++) {
+    scoresEL[i].textContent = scores[i];
+  }
+  if (!player1.classList.contains('player--active')) {
+    player1.classList.toggle('player--active');
+    player2.classList.toggle('player--active');
+  }
 };
 
-
 btnRoll.addEventListener('click', diceRoll);
-btnHold.addEventListener('click', function () {
-  player1.classList.contains('player--active')
-    ? (elP1Score.textContent = score)
-    : (elP2Score.textContent = score);
-  changePlayer();
-});
-*/
+btnHold.addEventListener('click', hold);
+btnNew.addEventListener('click', reset);

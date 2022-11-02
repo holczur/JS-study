@@ -33,11 +33,17 @@ const toggleActive = function () {
 
 const hold = function () {
   scores[activePlayer] += currentScores[activePlayer];
-  document.getElementById(`score--${activePlayer}`).textContent =
-    scores[activePlayer];
-  currentScores[activePlayer] = 0;
-  displayCurrent();
-  toggleActive();
+  if (scores[activePlayer] < 100) {
+    document.getElementById(`score--${activePlayer}`).textContent =
+      scores[activePlayer];
+    currentScores[activePlayer] = 0;
+    displayCurrent();
+    toggleActive();
+  } else {
+    document.getElementById(`score--${activePlayer}`).textContent = 'WINNER';
+    btnRoll.disabled = true;
+    btnHold.disabled = true;
+  }
 };
 
 const displayCurrent = function () {
@@ -57,6 +63,8 @@ const reset = function () {
     player1.classList.toggle('player--active');
     player2.classList.toggle('player--active');
   }
+  btnRoll.disabled = false;
+  btnHold.disabled = false;
 };
 
 btnRoll.addEventListener('click', diceRoll);

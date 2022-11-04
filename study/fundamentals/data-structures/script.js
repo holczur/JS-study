@@ -149,3 +149,23 @@ console.log('nullish coalescent: ', null ?? undefined ?? 'hi' ?? null); // hi
 restaurant.numGuests = 0;
 const guests3 = restaurant.numGuests ?? 10;
 console.log(guests3); // 0
+
+//Logical assignment Operators
+
+const rest1 = {
+  name: "Olive's olives",
+  numGuests: 10,
+};
+const rest2 = {
+  name: 'Pizza Roma',
+  owner: 'Giorgio Giovanni',
+};
+
+rest1.owner &&= '<ANONYMUS>'; // Nothing will happen, bec. there's no owner key in rest1
+rest2.owner &&= '<ANONYMUS>'; // owner will be changed to <ANONYMUS>
+
+rest1.numGuests ??= 30; // numGuests will be remain 10
+rest2.numGuests ??= 30; // numGuests will be set to 30, because rest2 doesn't have a numGuest key
+
+console.log(rest1);
+console.log(rest2);

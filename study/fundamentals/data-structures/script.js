@@ -115,3 +115,37 @@ add(2, 3);
 add(7, 8, 12);
 add(2, 2, 5, 7, 345, 776, 8);
 add(...x);
+
+//short circuitung with OR: return first truthy
+console.log(3 || 'Norbert'); // 3
+console.log(0 || 'Norbert'); // Norbert
+console.log(0 || undefined); // undefined
+console.log(undefined || 0 || '' || 'hello' || 2); // hello
+console.log(undefined || null || '' || 0); // 0
+
+restaurant.numGuests = 23;
+const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
+console.log(guests1);
+
+const guests2 = restaurant.numGuests || 10;
+console.log(guests2); // 10 //doesn't work if the value is present, but it is falsy (restaurant.numGuests = 0)
+
+//short circuitung with AND: return first falsy
+console.log('hello' && 23 && null && 0 && true); // null --> returns the first falsy value
+console.log('hello' && 23 && true); // true --> returns the last truthy, if there's no falsy value
+
+if (restaurant.orderPasta) {
+  restaurant.orderPasta('mushrooms', 'spinach', 'olives');
+}
+
+//restaurant.orderPasta is truthy, so it continues and returns the last value
+restaurant.orderPasta &&
+  restaurant.orderPasta('mushrooms', 'spinach', 'olives');
+
+//The Nullish Coalescing Operator: return the first non-nullish (anything except: null or undefined) value
+console.log('nullish coalescent: ', null ?? undefined ?? 0 ?? null); // 0
+console.log('nullish coalescent: ', null ?? undefined ?? 'hi' ?? null); // hi
+
+restaurant.numGuests = 0;
+const guests3 = restaurant.numGuests ?? 10;
+console.log(guests3); // 0

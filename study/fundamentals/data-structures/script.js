@@ -222,3 +222,17 @@ const user = [{ name: 'John', email: 'john@gmail.com' }];
 const user2 = [];
 console.log(user[0]?.name ?? 'user array is empty');
 console.log(user2[0]?.name ?? 'user array is empty'); // To check if an array is empty
+
+// LOOPING OVER OBJECTS
+let openStr = `We are open on ${Object.keys(openingHours).length} days: `;
+for (const day of Object.keys(openingHours)) {
+  openStr += `${day}, `;
+}
+openStr = openStr.slice(0, -1);
+console.log(openStr);
+console.log(openStr.slice(0, -1));
+
+const entries = Object.entries(openingHours);
+for (const [key, { open, close }] of entries) {
+  console.log(`On ${key} we are open from ${open} to ${close}`);
+} //The value can be deconstructed right inside the for loop

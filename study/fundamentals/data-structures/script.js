@@ -204,3 +204,21 @@ const obj2 = {
 
 console.log(obj2);
 obj2.sum(1, 2);
+
+// OPTIONAL CHAINING .?
+//console.log(restaurant.openingHours.mon.open); // Error: cannot read property of undefined
+console.log(restaurant.openingHours.mon?.open); // undefined --> With ? we will get undefined if we want to read a property of an undefined value.
+
+const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+for (const day of days) {
+  const open = restaurant.openingHours[day]?.open ?? 'closed'; // if value is undefined return 'closed'
+  console.log(`On ${day} we are open at ${open}`);
+}
+
+console.log(restaurant.order?.(0, 1) ?? "Method doesn't exist");
+console.log(restaurant.foo?.(0, 1) ?? "Method doesn't exist"); //to check if a method is existing, before wee call it
+
+const user = [{ name: 'John', email: 'john@gmail.com' }];
+const user2 = [];
+console.log(user[0]?.name ?? 'user array is empty');
+console.log(user2[0]?.name ?? 'user array is empty'); // To check if an array is empty

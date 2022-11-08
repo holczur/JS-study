@@ -236,3 +236,68 @@ const entries = Object.entries(openingHours);
 for (const [key, { open, close }] of entries) {
   console.log(`On ${key} we are open from ${open} to ${close}`);
 } //The value can be deconstructed right inside the for loop
+
+//----------------------- SETS ------------------------------
+console.log('---------------------------- SETS -------------------------');
+
+//A set is a collection of unique elements
+const orderSet = new Set([
+  'pasta',
+  'risotto',
+  'pizza',
+  'pasta',
+  'pasta',
+  'risotto',
+]);
+console.log(orderSet);
+
+console.log(orderSet.size);
+console.log(orderSet.has('pizza'));
+console.log(orderSet.has('bread'));
+orderSet.add('garlic bread');
+orderSet.add('garlic bread');
+console.log(orderSet);
+orderSet.delete('risotto');
+console.log(orderSet);
+
+for (const order of orderSet) console.log(order);
+
+const staff = ['waiter', 'chef', 'manager', 'waiter', 'waiter', 'chef'];
+
+const staffUnique = [...new Set(staff)]; //to easily remove duplication from an array
+console.log(staffUnique);
+
+console.log(
+  new Set('sdféjnvfdkjblfgbljbvnéjfdnbmévkxyhfncéosdbv némlkvbfs cx').size
+); // count how many different characters does the string have
+
+console.log('-------------------------------- MAPS ------------------------');
+
+const rest = new Map();
+rest.set('name', 'Classico Italiano');
+rest.set(1, 'Firenze');
+rest.set(2, 'Lisbon');
+
+rest // each .set returns the map, so they can be chained
+  .set('categories', 'Italian', 'Pizzeria')
+  .set('open', 11)
+  .set('close', 23)
+  .set(true, 'We are open') // map keys can be any kind of value
+  .set(arr, 'test')
+  .set(document.querySelector('h1'), 'heading')
+  .set(false, 'We are closed');
+
+console.log(rest.get('name'));
+console.log(rest.get(true));
+console.log(rest.get(1));
+
+let time = 9;
+console.log(rest.get(time > rest.get('open') && time < rest.get('close')));
+time = 19;
+console.log(rest.get(time > rest.get('open') && time < rest.get('close')));
+
+console.log(rest.has('categories'));
+rest.delete(2);
+console.log(rest);
+console.log(rest.size);
+console.log(rest.clear);

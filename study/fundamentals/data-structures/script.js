@@ -169,3 +169,38 @@ rest2.numGuests ??= 30; // numGuests will be set to 30, because rest2 doesn't ha
 
 console.log(rest1);
 console.log(rest2);
+
+//THE FOR OF LOOP
+for (const item of menu) console.log(item);
+
+//to get the index of an item is possible through the .entries method
+for (const [i, el] of menu.entries()) console.log(`${i}: ${el}`); //item can be deconstructured in place
+
+// Enhanced Object Literals
+const second = {
+  d: 4,
+  e: 5,
+  f: 6,
+};
+
+const other = ['third', 'fourth', 'fifth'];
+
+const obj2 = {
+  first: {
+    a: 1,
+    b: 2,
+    c: 3,
+  },
+  second, //to include an object to an other object
+  sum(num1, num2) {
+    console.log(num1 + num2);
+  }, // functions can be declared this way instead of sum: function (){};
+  [other[0]]: {
+    g: 7,
+    h: 8,
+    i: 9,
+  }, // keys can be computed by using []
+};
+
+console.log(obj2);
+obj2.sum(1, 2);

@@ -300,4 +300,37 @@ console.log(rest.has('categories'));
 rest.delete(2);
 console.log(rest);
 console.log(rest.size);
-console.log(rest.clear);
+
+//Maps can be populated by this way as well
+const question = new Map([
+  ['question', 'What is the best programming language in the world?'],
+  [1, 'C'],
+  [2, 'Java'],
+  [3, 'JavaScript'],
+  ['correct', 3],
+  [true, 'Correct! 🤑'],
+  [false, 'Try again! 🤡'],
+]);
+console.log(question);
+
+//This structure is similar to that one we'll get with Object.entries()
+console.log(Object.entries(openingHours));
+
+//So convering an object into a map is as easy as that:
+const mapOpen = new Map(Object.entries(openingHours));
+console.log(mapOpen);
+
+//Maps are iterables
+for (const [key, value] of question) {
+  if (typeof key === 'number') console.log(`Answer ${key}: ${value}`);
+}
+//const answer = Number(prompt('Your answer:'));
+const answer = 3;
+
+/* question.get('correct') === answer is true if the input is 3, and false if anything else.
+That result can be used to respond for user, because in the map a value was set to
+keys true and false*/
+console.log(question.get(question.get('correct') === answer));
+
+//convert map to array
+console.log([...question]);

@@ -44,15 +44,50 @@
             */
 
 const holder = [];
-const sack = {
-  a: [6, 1],
-  á: [4, 1],
-  b: [3, 2],
-  c: [1, 5],
-  cs: [1, 7],
-  d: [3, 2],
-  e: [6, 1],
-  é: [3, 3],
+const sack = [
+  {
+    letter: "a",
+    quant: 6,
+    value: 1,
+  },
+  {
+    letter: "á",
+    quant: 4,
+    value: 1,
+  },
+  {
+    letter: "b",
+    quant: 3,
+    value: 2,
+  },
+  {
+    letter: "c",
+    quant: 1,
+    value: 5,
+  },
+  {
+    letter: "d",
+    quant: 3,
+    value: 2,
+  },
+  {
+    letter: "e",
+    quant: 6,
+    value: 1,
+  },
+  {
+    letter: "é",
+    quant: 3,
+    value: 3,
+  },
+  {
+    letter: "f",
+    quant: 2,
+    value: 4,
+  },
+];
+
+/*
   f: [2, 4],
   g: [3, 2],
   gy: [2, 4],
@@ -84,17 +119,18 @@ const sack = {
   z: [2, 4],
   zs: [1, 8],
   blank: [2, 0],
-};
-const deletedSack = {};
-
+  */
 //---------------- SACK ------------------
-let sackSize = 100;
+let sackSize = 0;
 
 //recount sackSize
 const countSize = function () {
   sackSize = 0;
-  for (const [num] of Object.values(sack)) sackSize += num;
+  for (let i = 0; i < sack.length; i++) {
+    sackSize += sack[i].quant;
+  }
 };
+countSize();
 const temp = [];
 
 const randomPull = function (pieces) {
@@ -113,34 +149,29 @@ const randomPull = function (pieces) {
   };
   let counter = 0;
   let index = 0;
-  let key, quantity, value;
 
-  for (let i = 0; i < pieces; i++) {
-    index = random(); //genereate new random number based on new sackSize
-
-    // find random letter and store in temp
-    for ([key, [quantity, value]] of Object.entries(sack)) {
-      if (counter < index) {
-        counter += quantity;
-        temp.push(key);
+  //to pull letters from sack
+  for (let j = 0; j < pieces; j++) {
+    index = random();
+    console.log(`random number is ${index}`);
+    for (let i = 0; i < sack.length; i++) {
+      counter += sack[i].quant;
+      console.log(`for ${sack[i].letter}: ${counter}`);
+      if (counter >= index) {
+        sack[i];
+        if (sack[i].quant > 0) {
+          sack[i].quant--;
+        }
+        countSize();
+        break;
       }
     }
-
-    // decrease letter quant., if 0, delete key
-    sack[temp.slice(-1)][0]--;
-    if (sack[temp.slice(-1)][0] <= 0) {
-      delete sack[temp.slice(-1)];
-    }
-
-    this.holder.push(temp.pop()); //push from temp to players holder
-    sackSize--; // decrease sackSize
-    counter = 0; //reset counter
-    temp.length = 0; //reset temp
+    counter = 0;
   }
-
-  console.log(`p1Holder: ${this.holder}`);
+  for (let i = 0; i < holder.length; i++) {
+    holder[i].quant = 1;
+  }
 };
-
 //to fill up each player's holder at game start
 const fillUp = function () {
   players.forEach((element) => {

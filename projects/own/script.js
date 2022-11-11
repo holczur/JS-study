@@ -94,6 +94,7 @@ const countSize = function () {
   sackSize = 0;
   for (const [num] of Object.values(sack)) sackSize += num;
 };
+const temp = [];
 
 const randomPull = function (pieces) {
   /* 
@@ -110,7 +111,6 @@ const randomPull = function (pieces) {
     return Math.floor(Math.random() * sackSize + 1);
   };
   let counter = 0;
-  const temp = [];
   let index = 0;
   let key, quantity, value;
 

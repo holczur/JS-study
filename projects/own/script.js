@@ -85,6 +85,7 @@ const sack = {
   zs: [1, 8],
   blank: [2, 0],
 };
+const deletedSack = {};
 
 //---------------- SACK ------------------
 let sackSize = 100;
@@ -140,6 +141,31 @@ const randomPull = function (pieces) {
   console.log(`p1Holder: ${this.holder}`);
 };
 
+//to fill up each player's holder at game start
+const fillUp = function () {
+  players.forEach((element) => {
+    console.log(element.isInGame);
+    if (element.isInGame) element.randomPull(7);
+  });
+};
+
+//to change letters
+const changeLetters = function (pieces) {
+  for (let i = 0; i < pieces; i++) {
+    let choose = Number(
+      prompt(
+        `Choose the index of the letter you want to change: ${this.holder}`
+      )
+    );
+    this.temp.push(this.holder[choose]);
+    this.holder.splice(choose, 1);
+    console.log(this.temp);
+  }
+  this.randomPull(this.temp.length);
+  for (const e of this.temp) {
+  }
+};
+
 //---------------- PLAYERS ----------------------
 
 const players = [
@@ -147,14 +173,17 @@ const players = [
     name: "Player1",
     holder: [],
     score: 0,
+    temp: [],
     isInGame: true,
     isActive: true,
     randomPull,
+    changeLetters,
   },
   {
     name: "Player2",
     holder: [],
     score: 0,
+    temp: [],
     isInGame: true,
     isActive: false,
     randomPull,
@@ -163,6 +192,7 @@ const players = [
     name: "Player3",
     holder: [],
     score: 0,
+    temp: [],
     isInGame: true,
     isActive: false,
     randomPull,
@@ -171,16 +201,9 @@ const players = [
     name: "Player4",
     holder: [],
     score: 0,
+    temp: [],
     isInGame: false,
     isActive: false,
     randomPull,
   },
 ];
-
-//to fill up each player's holder at game start
-const fillUp = function () {
-  players.forEach((element) => {
-    console.log(element.isInGame);
-    if (element.isInGame) element.randomPull(7);
-  });
-};

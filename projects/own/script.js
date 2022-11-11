@@ -139,4 +139,32 @@ const randomPull = function (pieces) {
 
   console.log(`Holder: ${holder}`);
 };
-//---------------- HOLDER ------------------
+
+//---------------- PLAYERS ----------------------
+
+const players = [
+  {
+    name: "Player1",
+    holder: [],
+    score: 0,
+    isActive: true,
+  },
+  {
+    name: "Player2",
+    holder: [],
+    score: 0,
+    isActive: false,
+  },
+  {
+    name: "Player3",
+    holder: [],
+    score: 0,
+    isActive: false,
+  },
+  {
+    name: "Player4",
+    holder: [],
+    score: 0,
+    isActive: false,
+  },
+];

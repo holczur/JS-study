@@ -101,7 +101,7 @@ const randomPull = function (pieces) {
   With every pull:
     1. generate new random number based on sackSize
     2. find the nth letter in the sack
-    3. collect letters in a temp array
+    3. collect letters in a temp array, when filled push items to active player's holder
     4. decrease sackSize
     5. decrease nth letter quantity
     6. if quantity is 0, delete key
@@ -131,13 +131,13 @@ const randomPull = function (pieces) {
       delete sack[temp.slice(-1)];
     }
 
-    holder.push(temp.pop()); //push from temp to players holder
+    this.holder.push(temp.pop()); //push from temp to players holder
     sackSize--; // decrease sackSize
     counter = 0; //reset counter
     temp.length = 0; //reset temp
   }
 
-  console.log(`Holder: ${holder}`);
+  console.log(`p1Holder: ${this.holder}`);
 };
 
 //---------------- PLAYERS ----------------------
@@ -147,24 +147,40 @@ const players = [
     name: "Player1",
     holder: [],
     score: 0,
+    isInGame: true,
     isActive: true,
+    randomPull,
   },
   {
     name: "Player2",
     holder: [],
     score: 0,
+    isInGame: true,
     isActive: false,
+    randomPull,
   },
   {
     name: "Player3",
     holder: [],
     score: 0,
+    isInGame: true,
     isActive: false,
+    randomPull,
   },
   {
     name: "Player4",
     holder: [],
     score: 0,
+    isInGame: false,
     isActive: false,
+    randomPull,
   },
 ];
+
+//to fill up each player's holder at game start
+const fillUp = function () {
+  players.forEach((element) => {
+    console.log(element.isInGame);
+    if (element.isInGame) element.randomPull(7);
+  });
+};

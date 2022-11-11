@@ -284,9 +284,8 @@ const countSize = function () {
     sackSize += sack[i].quant;
   }
 };
-
 countSize();
-const temp = [];
+
 const random = function () {
   return Math.floor(Math.random() * sackSize + 1);
 };
@@ -295,29 +294,12 @@ const randomDraw = function (pieces) {
   let counter = 0;
   let index = 0;
 
-  //find corresponding value and decrease its quantity
   for (let i = 0; i < pieces; i++) {
+    countSize();
     index = random();
-    console.log(`random number is ${index}`);
-    for (let j = 0; i < sack.length; j++) {
-      counter += sack[j].quant;
-      console.log(`for ${sack[j].letter}: ${counter}`);
-      if (counter >= index) {
-        this.holder.push(Object.values(sack[j]));
-        if (sack[j].quant > 0) {
-          sack[j].quant--;
-        }
-        countSize();
-        break;
-      }
-    }
-    counter = 0;
   }
-  for (const e of this.holder) {
-    e[1] = 1; // Set quantity to one
-  }
-  console.log(this.holder);
 };
+
 //---------------- PLAYERS ----------------------
 
 const players = [

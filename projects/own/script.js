@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 /* ----------------------------- SCRBBLE --------------------------------
     Table: 15x15
@@ -16,9 +16,9 @@
             - Only one word can be placed per turn, but that can create multiple other words wth the connections
         
         Gameplay:
-            - After a word is placed, the player has to pull as many letters from the sack as she used
+            - After a word is placed, the player has to draw as many letters from the sack as she used
             - Players can pass their turn if they cannot place any word (0 points)
-            - Players can change their letters by pulling from the sack if they want to. If they do so, their turn is over with 0 points.
+            - Players can change their letters by drawing from the sack if they want to. If they do so, their turn is over with 0 points.
             - The game ends if a player had placed all of her letters and the sack is also empty OR
                 All players pass their turn
             
@@ -46,44 +46,199 @@
 const holder = [];
 const sack = [
   {
-    letter: "a",
+    letter: 'a',
     quant: 6,
     value: 1,
   },
   {
-    letter: "á",
+    letter: 'á',
     quant: 4,
     value: 1,
   },
   {
-    letter: "b",
+    letter: 'b',
     quant: 3,
     value: 2,
   },
   {
-    letter: "c",
+    letter: 'c',
     quant: 1,
     value: 5,
   },
   {
-    letter: "d",
+    letter: 'cs',
+    quant: 1,
+    value: 7,
+  },
+  {
+    letter: 'd',
     quant: 3,
     value: 2,
   },
   {
-    letter: "e",
+    letter: 'e',
     quant: 6,
     value: 1,
   },
   {
-    letter: "é",
+    letter: 'é',
     quant: 3,
+    value: 4,
+  },
+  {
+    letter: 'f',
+    quant: 2,
+    value: 4,
+  },
+  {
+    letter: 'g',
+    quant: 3,
+    value: 2,
+  },
+  {
+    letter: 'gy',
+    quant: 2,
+    value: 4,
+  },
+  {
+    letter: 'h',
+    quant: 2,
     value: 3,
   },
   {
-    letter: "f",
+    letter: 'i',
+    quant: 3,
+    value: 1,
+  },
+  {
+    letter: 'í',
+    quant: 1,
+    value: 5,
+  },
+  {
+    letter: 'j',
     quant: 2,
     value: 4,
+  },
+  {
+    letter: 'k',
+    quant: 6,
+    value: 1,
+  },
+  {
+    letter: 'l',
+    quant: 4,
+    value: 1,
+  },
+  {
+    letter: 'ly',
+    quant: 1,
+    value: 8,
+  },
+  {
+    letter: 'm',
+    quant: 3,
+    value: 1,
+  },
+  {
+    letter: 'n',
+    quant: 4,
+    value: 1,
+  },
+  {
+    letter: 'ny',
+    quant: 1,
+    value: 5,
+  },
+  {
+    letter: 'o',
+    quant: 3,
+    value: 1,
+  },
+  {
+    letter: 'ó',
+    quant: 3,
+    value: 2,
+  },
+  {
+    letter: 'ö',
+    quant: 2,
+    value: 4,
+  },
+  {
+    letter: 'ő',
+    quant: 1,
+    value: 7,
+  },
+  {
+    letter: 'p',
+    quant: 2,
+    value: 4,
+  },
+  {
+    letter: 'r',
+    quant: 4,
+    value: 1,
+  },
+  {
+    letter: 's',
+    quant: 3,
+    value: 1,
+  },
+  {
+    letter: 'sz',
+    quant: 2,
+    value: 3,
+  },
+  {
+    letter: 't',
+    quant: 5,
+    value: 1,
+  },
+  {
+    letter: 'ty',
+    quant: 1,
+    value: 10,
+  },
+  {
+    letter: 'u',
+    quant: 2,
+    value: 4,
+  },
+  {
+    letter: 'ú',
+    quant: 1,
+    value: 7,
+  },
+  {
+    letter: 'ü',
+    quant: 2,
+    value: 4,
+  },
+  {
+    letter: 'ű',
+    quant: 1,
+    value: 7,
+  },
+  {
+    letter: 'v',
+    quant: 2,
+    value: 3,
+  },
+  {
+    letter: 'z',
+    quant: 2,
+    value: 4,
+  },
+  {
+    letter: 'zs',
+    quant: 1,
+    value: 8,
+  },
+  {
+    letter: 'balnk',
+    quant: 2,
+    value: 0,
   },
 ];
 
@@ -120,47 +275,37 @@ const sack = [
   zs: [1, 8],
   blank: [2, 0],
   */
-//---------------- SACK ------------------
-let sackSize = 0;
 
 //recount sackSize
+let sackSize = 0;
 const countSize = function () {
   sackSize = 0;
   for (let i = 0; i < sack.length; i++) {
     sackSize += sack[i].quant;
   }
 };
+
 countSize();
 const temp = [];
+const random = function () {
+  return Math.floor(Math.random() * sackSize + 1);
+};
 
-const randomPull = function (pieces) {
-  /* 
-  Hhow many letters to pull = pieces
-  With every pull:
-    1. generate new random number based on sackSize
-    2. find the nth letter in the sack
-    3. collect letters in a temp array, when filled push items to active player's holder
-    4. decrease sackSize
-    5. decrease nth letter quantity
-    6. if quantity is 0, delete key
-    */
-  const random = function () {
-    return Math.floor(Math.random() * sackSize + 1);
-  };
+const randomDraw = function (pieces) {
   let counter = 0;
   let index = 0;
 
-  //to pull letters from sack
-  for (let j = 0; j < pieces; j++) {
+  //find corresponding value and decrease its quantity
+  for (let i = 0; i < pieces; i++) {
     index = random();
     console.log(`random number is ${index}`);
-    for (let i = 0; i < sack.length; i++) {
-      counter += sack[i].quant;
-      console.log(`for ${sack[i].letter}: ${counter}`);
+    for (let j = 0; i < sack.length; j++) {
+      counter += sack[j].quant;
+      console.log(`for ${sack[j].letter}: ${counter}`);
       if (counter >= index) {
-        sack[i];
-        if (sack[i].quant > 0) {
-          sack[i].quant--;
+        this.holder.push(Object.values(sack[j]));
+        if (sack[j].quant > 0) {
+          sack[j].quant--;
         }
         countSize();
         break;
@@ -168,73 +313,48 @@ const randomPull = function (pieces) {
     }
     counter = 0;
   }
-  for (let i = 0; i < holder.length; i++) {
-    holder[i].quant = 1;
+  for (const e of this.holder) {
+    e[1] = 1; // Set quantity to one
   }
+  console.log(this.holder);
 };
-//to fill up each player's holder at game start
-const fillUp = function () {
-  players.forEach((element) => {
-    console.log(element.isInGame);
-    if (element.isInGame) element.randomPull(7);
-  });
-};
-
-//to change letters
-const changeLetters = function (pieces) {
-  for (let i = 0; i < pieces; i++) {
-    let choose = Number(
-      prompt(
-        `Choose the index of the letter you want to change: ${this.holder}`
-      )
-    );
-    this.temp.push(this.holder[choose]);
-    this.holder.splice(choose, 1);
-    console.log(this.temp);
-  }
-  this.randomPull(this.temp.length);
-  for (const e of this.temp) {
-  }
-};
-
 //---------------- PLAYERS ----------------------
 
 const players = [
   {
-    name: "Player1",
+    name: 'Player1',
     holder: [],
     score: 0,
     temp: [],
     isInGame: true,
     isActive: true,
-    randomPull,
-    changeLetters,
+    randomDraw,
   },
   {
-    name: "Player2",
+    name: 'Player2',
     holder: [],
     score: 0,
     temp: [],
     isInGame: true,
     isActive: false,
-    randomPull,
+    randomDraw,
   },
   {
-    name: "Player3",
+    name: 'Player3',
     holder: [],
     score: 0,
     temp: [],
     isInGame: true,
     isActive: false,
-    randomPull,
+    randomDraw,
   },
   {
-    name: "Player4",
+    name: 'Player4',
     holder: [],
     score: 0,
     temp: [],
     isInGame: false,
     isActive: false,
-    randomPull,
+    randomDraw,
   },
 ];

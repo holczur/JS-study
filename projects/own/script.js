@@ -41,8 +41,9 @@
             - After the game ends, all players' remaining letters are count as minus from their score.
             - If the game has ended because a player had placed all of her letters, that player receives all the points the others had lost
             - The winner is that player, who has the highest score.
-*/
+            */
 
+const holder = [];
 const sack = {
   a: [6, 1],
   á: [4, 1],
@@ -87,22 +88,23 @@ const sack = {
 
 //---------------- SACK ------------------
 let sackSize = 100;
+
+//recount sackSize
 const countSize = function () {
   sackSize = 0;
-  for (const [num, value] of Object.values(sack)) sackSize += num;
+  for (const [num] of Object.values(sack)) sackSize += num;
 };
 
-const holder = [];
 const randomPull = function (pieces) {
   /* 
-    1. húzások száma = funkció paramétere
-2. Minden húzáskor:
-    1. Zsák mérete alapján random szám minden húzáshoz
-    2. a szám alapján találja meg a hozzá tartozó betűt
-    3. a kihúzott betűt tegye az aktív játékos tárhelyére
-    4. csökkentse a zsákban a kihúzott betűhöz tartozó mennyiséget
-    5. ellenőrizze, hogy a mennyiség > 0. Ha <= 0, akkor törölje a kulcsot a zsákból
-    6. csökkentse a zsák méretét eggyel.
+  Hhow many letters to pull = pieces
+  With every pull:
+    1. generate new random number based on sackSize
+    2. find the nth letter in the sack
+    3. collect letters in a temp array
+    4. decrease sackSize
+    5. decrease nth letter quantity
+    6. if quantity is 0, delete key
     */
   const random = function () {
     return Math.floor(Math.random() * sackSize + 1);
@@ -115,7 +117,7 @@ const randomPull = function (pieces) {
   for (let i = 0; i < pieces; i++) {
     index = random(); //genereate new random number based on new sackSize
 
-    // find random letter
+    // find random letter and store in temp
     for ([key, [quantity, value]] of Object.entries(sack)) {
       if (counter < index) {
         counter += quantity;
@@ -129,11 +131,10 @@ const randomPull = function (pieces) {
       delete sack[temp.slice(-1)];
     }
 
-    //push from temp to players holder
-    holder.push(temp.pop());
-    counter = 0;
-    sackSize--;
-    temp.length = 0;
+    holder.push(temp.pop()); //push from temp to players holder
+    sackSize--; // decrease sackSize
+    counter = 0; //reset counter
+    temp.length = 0; //reset temp
   }
 
   console.log(`Holder: ${holder}`);

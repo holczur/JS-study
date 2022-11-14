@@ -334,3 +334,71 @@ console.log(question.get(question.get('correct') === answer));
 
 //convert map to array
 console.log([...question]);
+
+//-------------------------------- STRINGS ------------------------------------
+console.log('------------------------------------------------------------');
+const airline = 'TAP Air Portugal';
+const plane = 'A230';
+
+console.log(plane[0]);
+console.log(plane.length);
+console.log(airline.indexOf('r'));
+console.log(airline.lastIndexOf('r'));
+console.log(airline.indexOf('Portugal'));
+console.log(airline.indexOf('portugal'));
+console.log(airline.slice(4, 7));
+console.log(airline.slice(0, airline.indexOf(' ')));
+console.log(airline.slice(-5));
+
+const chekMiddleSeat = function (seat) {
+  //B and E are middle seats
+  seat.slice(-1) === 'B' || seat.slice(-1) === 'E'
+    ? console.log('mid')
+    : console.log('side');
+};
+chekMiddleSeat('11B');
+chekMiddleSeat('23C');
+chekMiddleSeat('3E');
+
+console.log(new String('Norbert'));
+console.log(typeof new String('Norbert'));
+
+console.log(airline.toLocaleLowerCase());
+//fix name
+const passenger = 'jOnAS';
+const pasLow = passenger.toLocaleLowerCase();
+const pasFixed = pasLow[0].toUpperCase() + pasLow.slice(1);
+
+console.log(pasFixed);
+
+const email = 'hello@jonas.io';
+const login = '   Hello@Jonas.Io  \n';
+
+const emailCorrect = email.toLowerCase().trim();
+console.log(emailCorrect);
+
+//replacing
+const priceEU = '288,95€';
+const priceUS = priceEU.replace(',', '.').replace('€', '$');
+console.log(priceUS);
+
+const announcement =
+  'All passengers come to boarding door 23. Boarding door 23!';
+console.log(announcement.replaceAll('door', 'gate'));
+console.log(announcement.replace(/door/g, 'gate'));
+
+//Boolean
+console.log(plane.includes('B120'));
+console.log(plane.includes('A230'));
+
+const capitalizeName = function (name) {
+  const names = name.split(' ');
+  const capName = [];
+  for (const n of names) {
+    capName.push(n.replace(n[0], n[0].toUpperCase()));
+  }
+  console.log(capName.join(' '));
+};
+
+capitalizeName('jessica ann smith waltz');
+capitalizeName('norbert holcz');

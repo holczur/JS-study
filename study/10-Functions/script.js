@@ -98,7 +98,7 @@ book.apply(eurowings, flightData);
 //...but it is no longer used in modern JS, bec.:
 book.call(lufthansa, ...flightData);
 
-//The most popular way is the .bind() method
+//The most popular way is the .bind() method. It returns the function, but doesn't call it
 const bookEW = book.bind(eurowings);
 const bookLH = book.bind(lufthansa);
 
@@ -107,3 +107,35 @@ bookLH(44, 'Brian Phillips');
 
 console.log(lufthansa.bookings);
 console.log(eurowings.bookings);
+
+// With eventlistner
+lufthansa.planes = 300;
+lufthansa.buyPlane = function () {
+  console.log(this);
+  this.planes++;
+  console.log(this.planes);
+};
+
+/*Without the .bind() method the this keyword will refer to the eventlistener, so this will be the button itself. But the bind method  */
+document
+  .querySelector('.buy')
+  .addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
+
+// Partial application (preset parameters)
+const addTax = (rate, value) => value + value * rate;
+console.log(addTax(0.1, 200));
+
+const addVAT = addTax.bind(null, 0.23);
+/*we don't care with this keyword now, the standard value is usually null in that case. The .bind() method creates a new function from the general addTax a more specific one.
+ */
+console.log(addVAT(230));
+
+// mini challenge
+const tax = function (rate) {
+  return function (value) {
+    return value + value * rate;
+  };
+};
+
+const vat = tax(0.23);
+console.log(vat(100));

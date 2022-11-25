@@ -139,3 +139,75 @@ const tax = function (rate) {
 
 const vat = tax(0.23);
 console.log(vat(100));
+
+//Immediately Invoked Function Expression: in modern JS it's rarely used
+(function () {
+  console.log('This will run only once');
+})();
+
+(() => console.log('Just like this'))();
+
+//------------------------------- CLOSURES--------------------------
+/*The function below has a variable and returns a function, that update that variable.
+If we save this function to a variable and call that, then the returned function will have access to the passengerCount variable even if the secureBooking function is over.
+That's because something called "closure". Because of that:
+A FUNCTION ALWAYS HAS ACCES TO THE VARIABLE ENVIRONMENT OF THE EXECUTION CONTEXT IN WICH IT WAS CREATED EVEN AFTER THAT EC IS GONE */
+const secureBooking = function () {
+  let passengerCount = 0;
+
+  return function () {
+    passengerCount++;
+    console.log(`${passengerCount} passengers`);
+  };
+};
+const booker = secureBooking();
+
+booker();
+booker();
+booker();
+
+/*
+If JS cannot find a variable, it tries to find it in the scope chain, but before that it will look at the closure. An intuitive definiton for the closure is that there is a chain between a function and its birthplace and that chain is the closure
+
+We cannot explicitly acces the closure, because a closure is NOT a tangible JS object. In a less formal definition a function is a man, who has a backpack in which there are all the things he will need from home. When he need something that is not in his hand to do his job, then he will look at his backpack. But there is a way we can see that backpack's content:
+*/
+
+console.dir(booker);
+/*under [[Scopes]]: Scopes[3] there will be a property at index 0, called Closure and the passengerCount varieble will be stored there. Anytime we see a double brackets [[]] in the console, it means that it is an internal property and we cannot access from our code */
+
+let f;
+
+const g = function () {
+  const a = 23;
+  f = function () {
+    console.log(a * 2);
+  };
+};
+
+g(); //after this "g" has finished its executin
+f(); //but because of the closure "f" has acces to "a"
+
+//Re-assigning f function
+const h = function () {
+  const b = 70;
+  f = function () {
+    console.log(b * 2);
+  };
+};
+
+h(); // after this call "f" value will be defined by "h"
+f(); // so we will find "b" under the closure in [[Scopes]] of "f"
+
+console.dir(f);
+
+const boardPassengers = function (n, wait) {
+  const perGoup = n / 3;
+  setTimeout(function () {
+    console.log(`We are now boarding all ${n} passengers`);
+    console.log(`There are 3 groups, each with ${perGoup} passengers`);
+  }, wait * 1000);
+
+  console.log(`Will start boarding in ${wait} seconds`);
+};
+
+boardPassengers(90, 5);

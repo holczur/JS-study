@@ -611,3 +611,140 @@ for ([key, value] of gameEvents) {
   key <= 45 ? (halftime = "[FIRST HALF]") : (halftime = "[SECOND HALF]");
   console.log(`${halftime} ${key}: ${value}`);
 }
+
+/* 
+Coding Challenge #4
+Write a program that receives a list of variable names written in underscore_case 
+and convert them to camelCase.
+The input will come from a textarea inserted into the DOM (see code below to 
+insert the elements), and conversion will happen when the button is pressed.
+Should produce this output (5 separate console.log outputs):
+underscoreCase ✅
+firstName ✅✅
+someVariable ✅✅✅
+calculateAge ✅✅✅✅
+delayedDeparture ✅✅✅✅✅
+Hints:
+§ Remember which character defines a new line in the textarea �
+§ The solution only needs to work for a variable made out of 2 words, like a_b
+§ Start without worrying about the ✅. Tackle that only after you have the variable 
+name conversion working �
+§ This challenge is difficult on purpose, so start watching the solution in case 
+you're stuck. Then pause and continue!
+Afterwards, test with your own test data!
+GOOD LUCK �
+*/
+
+document.body.append(document.createElement("textarea"));
+document.body.append(document.createElement("button"));
+const button = document.querySelector("button");
+const textarea = document.querySelector("textarea");
+button.textContent = "SEND";
+
+button.addEventListener("click", function () {
+  const input = textarea.value;
+  const rows = input.split("\n");
+  /*   for (let i = 0; i < rows.length; i++) { 
+    rows[i] = rows[i].trim().toLowerCase().split("_");
+    rows[i][1] =
+      rows[i][1].charAt(0).toUpperCase() + rows[i][1].slice(1);
+    rows[i] = rows[i].join("");
+    console.log(`${rows[i].padEnd(20, " ")}${"✅".repeat(i + 1)}`);
+  }
+ */
+  for (const [i, row] of rows.entries()) {
+    const [first, second] = row.toLowerCase().trim().split("_");
+    output = `${first}${second.replace(second[0], second[0].toUpperCase())}`;
+    console.log(`${output.padEnd(20)}${"✅".repeat(i + 1)}`);
+  }
+
+  /* 
+Test data (pasted to textarea, including spaces):
+underscore_case
+first_name
+Some_Variable 
+ calculate_AGE
+delayed_departure
+ */
+});
+
+/**
+ Coding Challenge #1
+Let's build a simple poll app!
+A poll has a question, an array of options from which people can choose, and an 
+array with the number of replies for each option. This data is stored in the starter 
+'poll' object below.
+Your tasks:
+1. Create a method called 'registerNewAnswer' on the 'poll' object. The 
+method does 2 things:
+1.1. Display a prompt window for the user to input the number of the 
+selected option. The prompt should look like this:
+What is your favourite programming language?
+0: JavaScript
+1: Python
+2: Rust
+3: C++
+(Write option number)
+1.2. Based on the input number, update the 'answers' array property. For 
+example, if the option is 3, increase the value at position 3 of the array by 
+1. Make sure to check if the input is a number and if the number makes 
+sense (e.g. answer 52 wouldn't make sense, right?)
+2. Call this method whenever the user clicks the "Answer poll" button.
+3. Create a method 'displayResults' which displays the poll results. The 
+method takes a string as an input (called 'type'), which can be either 'string'
+or 'array'. If type is 'array', simply display the results array as it is, using 
+console.log(). This should be the default option. If type is 'string', display a 
+string like "Poll results are 13, 2, 4, 1".
+4. Run the 'displayResults' method at the end of each 
+'registerNewAnswer' method call.
+5. Bonus: Use the 'displayResults' method to display the 2 arrays in the test 
+data. Use both the 'array' and the 'string' option. Do not put the arrays in the poll 
+object! So what should the this keyword look like in this situation?
+The Complete JavaScript Course 21
+Test data for bonus:
+§ Data 1: [5, 2, 3]
+§ Data 2: [1, 5, 3, 9, 6, 1
+
+ The Complete JavaScript Course 21
+Hints: Use many of the tools you learned about in this and the last section �
+GOOD LUCK �
+
+*/
+document.body.append(document.createElement("button"));
+const pollBtn = document.querySelectorAll("button")[1];
+pollBtn.textContent = "ANSWER POLL";
+
+const poll = {
+  question: "What is your favourite programming language?",
+  options: ["0: JavaScript", "1: Python", "2: Rust", "3: C++"],
+  // This generates [0, 0, 0, 0]. More in the next section!
+  answers: new Array(4).fill(0),
+  registerNewAnswer() {
+    const answer = Number(
+      prompt(
+        "What is your favourite programming language?\n 0: JavaScript\n 1: Python\n 2: Rust\n 3: C++\n(Write option number)"
+      )
+    );
+    if (answer >= 0 && answer <= 3) {
+      this.answers[answer]++;
+    } else {
+      alert("Input is not valid.");
+    }
+    this.displayPoll();
+  },
+  displayPoll(type = "array") {
+    if (type.toLowerCase() === "array") {
+      console.log(this.answers);
+    } else if (type.toLowerCase() === "string") {
+      console.log(`Poll results are: ${this.answers.join(", ")}`);
+    }
+  },
+};
+
+pollBtn.addEventListener("click", poll.registerNewAnswer.bind(poll));
+
+//Test data for bonus:
+const data1 = [5, 2, 3];
+const data2 = [1, 5, 3, 9, 6, 1];
+poll.displayPoll.call({ answers: data1 });
+poll.displayPoll.call({ answers: data1 }, "string");

@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 /**
  * DESCRIPTION:
@@ -114,11 +114,11 @@ if typeof arr[i] != number && >9 || <0 return null
         */
 
 const upArray = function (arr) {
-  const isOnlyNine = (currentValue) => currentValue === 9;
+  const isOnlyNine = currentValue => currentValue === 9;
   //validation
   if (arr.length === 0) return null;
   for (let i = 0; i < arr.length; i++) {
-    if (arr[i] > 9 || arr[i] < 0 || typeof arr[i] !== "number") {
+    if (arr[i] > 9 || arr[i] < 0 || typeof arr[i] !== 'number') {
       return null;
     } else continue;
   }
@@ -159,3 +159,75 @@ let num = parseInt(arr.join().replaceAll(",", ""));
   return r;
 };
 */
+
+/* 
+This represents a sack from which we can draw blindly a tile with a letter on it.
+I'd like to have a function that can randomly draw a given number (accepts this number as parameter)
+of tiles with real probabilities.
+
+To draw a tile means:
+
+choose one random letter based on the total number of tiles currently in the sack,
+push the drawn tile's letter to the empty array,
+decrease corresponding tile's quantity in the sack
+Other rules:
+
+The function has to be dynamic, because later there might be more tiles of letters with unknown quantities.
+Datastructures cannot be changed.
+Validation is not required (only valid parameter will be provided, the focus is on the probability theory) */
+
+const sack = [
+  {
+    letter: 'a',
+    quantity: 6,
+  },
+  {
+    letter: 'b',
+    quantity: 4,
+  },
+  {
+    letter: 'c',
+    quantity: 3,
+  },
+  {
+    letter: 'd',
+    quantity: 1,
+  },
+];
+
+const hand = [];
+
+let sackSize;
+const countSize = function () {
+  sackSize = 0;
+  for (const e of sack) {
+    sackSize += e.quantity;
+  }
+};
+countSize();
+
+const randomNum = function () {
+  return Math.floor(Math.random() * sackSize + 1);
+};
+
+const drawTile = function (pieces) {
+  let random = 0;
+  let counter = 0;
+
+  for (let j = 0; j < pieces; j++) {
+    counter = 0;
+    random = randomNum();
+    console.log(`The random number is: ${random}`);
+    for (let i = 0; i < sack.length; i++) {
+      if (counter >= random) {
+        hand.push(Object.values(sack[i - 1])[0]);
+        sack[i - 1].quantity--;
+        break;
+      } else {
+        counter += sack[i].quantity;
+      }
+    }
+  }
+
+  console.log(hand);
+};

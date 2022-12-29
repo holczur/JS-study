@@ -46,3 +46,4 @@ const calcTempAmpl2 = function (temps1, temps2) {
   }
   return Math.max(...temps1) - Math.min(...temps1);
 };
+

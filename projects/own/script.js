@@ -43,7 +43,6 @@
             - The winner is that player, who has the highest score.
             */
 
-const holder = [];
 const sack = [
   {
     letter: 'a',
@@ -291,15 +290,31 @@ const random = function () {
 };
 
 const randomDraw = function (pieces) {
+  let index = random();
+  console.log(`index is : ${index}`);
   let counter = 0;
-  let index = 0;
 
-  for (let i = 0; i < pieces; i++) {
-    countSize();
-    index = random();
+  for (let j = 0; j < pieces; j++) {
+    counter = 0;
+    for (let i = 0; i < sack.length; i++) {
+      if (sack[i].quant === 0) continue;
+      if (counter >= index) {
+        this.holder.push(Object.values(sack[i - 1]));
+        sack[i - 1].quant--;
+        break;
+      } else {
+        counter += sack[i].quant;
+        console.log(counter);
+        console.log(i);
+      }
+    }
   }
-};
 
+  for (const e of this.holder) {
+    e[1] = 1;
+  }
+  console.log(this.holder);
+};
 //---------------- PLAYERS ----------------------
 
 const players = [
@@ -340,3 +355,4 @@ const players = [
     randomDraw,
   },
 ];
+
